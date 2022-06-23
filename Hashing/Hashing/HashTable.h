@@ -58,7 +58,7 @@ public:
 	}
 
 	// Add value to hash table
-	void Add(const char* key, T value);
+	unsigned int Add(const char* key, T value);
 
 
 private:
@@ -68,13 +68,15 @@ private:
 
 
 template<typename T>
-inline void HashTable<T>::Add(const char* key, T value)
+inline unsigned int HashTable<T>::Add(const char* key, T value)
 {
 	// Get the hash key
 	auto hashedKey = HashFunction::hash(key, strlen(key));
 	// Use modulos to fit hash to array and add the key and value to that index
 	m_data[hashedKey % m_size].AddPair(hashedKey, value);
 
+	// For display purposes*
+	return hashedKey;
 }
 
 // ----------------------------------------------------------------------
